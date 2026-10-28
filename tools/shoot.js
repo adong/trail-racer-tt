@@ -49,7 +49,8 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
       if (s.size) await send('Emulation.setDeviceMetricsOverride', { width: s.size[0], height: s.size[1], deviceScaleFactor: 1, mobile: false });
       if (s.js) {
         const r = await send('Runtime.evaluate', { expression: s.js, awaitPromise: true, returnByValue: true });
-        const v = r.result && r.result.result ? r.result.result.value : r;
+        const ex = r.result && r.result.exceptionDetails;
+        const v = ex ? 'THREW ' + ((ex.exception && ex.exception.description) || ex.text).split('\n').slice(0, 4).join(' | ') : r.result && r.result.result ? r.result.result.value : r;
         console.log((s.label || s.shot || 'js') + ':', typeof v === 'string' ? v : JSON.stringify(v));
       }
       if (s.wait) await sleep(s.wait);

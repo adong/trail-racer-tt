@@ -1,0 +1,8 @@
+[
+ { "label": "prefs", "js": "localStorage.setItem('claudeGames.muted', '1'); location.reload(); 'reload'", "wait": 5000 },
+ { "label": "muted", "js": "String(Kit.sound.isMuted())" },
+ { "label": "check", "js": "JSON.stringify(game.check().failed)" },
+ { "label": "playCheck", "js": "JSON.stringify(game.playCheck())" },
+ { "label": "playCheck.prove", "js": "JSON.stringify(game.playCheck.prove())" },
+ { "label": "sounds counted (muted)", "js": "TR.Sfx.count + ' effects, last ' + TR.Sfx.last + ', muted ' + Kit.sound.isMuted()" }
+]
