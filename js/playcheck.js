@@ -82,8 +82,9 @@
           n++;
           if (!okFor(d, m)) fails.push(`${where}: went ${fmt(m)} for ${NAMES[d]}`);
           // the key straight back does nothing: he keeps going the way he was
+          lone(M, k, d);
           tap(keys[OPP[d]]);
-          step(0.35);
+          step(0.2);
           const m2 = moved(k);
           if (!M.riders[k].alive) fails.push(`${where}: the key straight back bumped him`);
           else if (!okFor(d, m2)) fails.push(`${where}: after the key straight back he went ${fmt(m2)}, want ${NAMES[d]} still`);

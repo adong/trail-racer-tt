@@ -17,7 +17,7 @@
   const COLORS = { teddy: '#2fa8ff', tommy: '#ff9f1c', foxy: '#ff4fa3', froggy: '#5ed15e' };
   const TREATS = [['🍦', 'ICE CREAM'], ['💧', 'WATER'], ['🧃', 'JUICE BOX'], ['🍪', 'COOKIE'], ['🍉', 'WATERMELON'], ['🍌', 'BANANA']];
   const RSCALE = 0.5; // a rider on his bike (the bike and rider are then drawn BIKE times bigger)
-  const BIKE = 1.5;
+  const BIKE = 1.7;
   const nameOf = (id) => Kit.roster.get(id).name;
   const buddyOf = (id) => Kit.roster.buddyFor(id);
 
@@ -727,6 +727,9 @@
   }
   function setLogo() { $('logoMain').textContent = Kit.lang.is('zh') ? TR.ZH : TR.TITLE.toUpperCase(); }
   const portraitNow = () => (innerHeight || 600) > (innerWidth || 800) * 1.05;
+  // a phone gets a smaller arena (EASY's is still the bigger one), so the cells stay big enough to see
+  const phone = () => Math.min(innerWidth || 800, innerHeight || 600) < 500;
+  const arenaSize = (diff) => (phone() ? { W: Math.round(TUNE[diff].W * TUNE.phone), H: Math.round(TUNE[diff].H * TUNE.phone) } : {});
   function riderList(two, hero) {
     if (two) return [{ id: 'teddy', human: true }, { id: 'tommy', human: true }, { id: 'foxy' }, { id: 'froggy' }];
     return [{ id: hero, human: true }, { id: 'foxy' }, { id: 'froggy' }];
@@ -750,7 +753,7 @@
   }
   function startDemo() {
     G.demo = true;
-    const M = TR.Sim.create({ diff: 'normal', portrait: portraitNow(), seed: (Math.random() * 1e9) | 0, riders: [{ id: 'teddy' }, { id: 'tommy' }, { id: 'foxy' }, { id: 'froggy' }] });
+    const M = TR.Sim.create(Object.assign({ diff: 'normal', portrait: portraitNow(), seed: (Math.random() * 1e9) | 0, riders: [{ id: 'teddy' }, { id: 'tommy' }, { id: 'foxy' }, { id: 'froggy' }] }, arenaSize('normal')));
     M.readyT = TUNE.readyT - 0.4;
     useMatch(M);
   }
@@ -774,10 +777,10 @@
     G.end = null;
     $('toasts').textContent = '';
     hideBanner();
-    const M = TR.Sim.create({
+    const M = TR.Sim.create(Object.assign({
       diff: G.diff, two: G.two, portrait: o.portrait != null ? o.portrait : portraitNow(),
       seed: o.seed != null ? o.seed : (Math.random() * 1e9) | 0, riders: riderList(G.two, G.hero),
-    });
+    }, o.full ? {} : arenaSize(G.diff)));
     show('play');
     useMatch(M);
     setupHud(M);

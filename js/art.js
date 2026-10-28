@@ -5,7 +5,7 @@
   'use strict';
   const T = THREE;
   const gfx = Kit.gfx;
-  const RIM = 0.7, WALL_H = 0.55, WALL_T = 0.22;
+  const RIM = 0.7, WALL_H = 0.75, WALL_T = 0.28;
 
   // the world around the arena: a soft purple evening with twinkly toy lights far below
   function makeWorld(scene) {

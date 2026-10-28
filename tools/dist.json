@@ -1,0 +1,27 @@
+[
+ {
+  "label": "prefs",
+  "js": "localStorage.setItem('claudeGames.muted', '1'); location.reload(); 'reload'",
+  "wait": 5000
+ },
+ {
+  "label": "boots",
+  "js": "game.screen() + ' ' + document.title + ' scripts ' + document.scripts.length + ' external ' + [...document.scripts].filter(s => s.src).length"
+ },
+ {
+  "label": "real frames run",
+  "js": "new Promise(r => { const a = game.M.rt; setTimeout(() => r('demo ticks ' + (game.M.rt - a)), 1500); })"
+ },
+ {
+  "label": "? panel freezes",
+  "js": "new Promise(r => { Kit.help.open(); setTimeout(() => { const a = game.M.rt; setTimeout(() => { const b = game.M.rt; Kit.help.close(); r('ticks while open ' + (b - a)); }, 800); }, 150); })"
+ },
+ {
+  "label": "check",
+  "js": "JSON.stringify(game.check().failed)"
+ },
+ {
+  "label": "playCheck",
+  "js": "JSON.stringify(game.playCheck().results.map(r => [r.name, r.n, r.fails.slice(0, 3)]))"
+ }
+]

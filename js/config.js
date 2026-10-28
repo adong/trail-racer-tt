@@ -12,6 +12,7 @@ TR.TUNE = {
   // the companion: pops in (the race goes slow-motion), signature move, treat, then ZAP: trails near you are gone
   buddy: { treat: 1.2, zap: 1.7, bye: 2.8, slow: 8, again: 0.5 },
   points: { cell: 1, outlast: 100, round: 500 },
-  easy: { W: 40, H: 28, speed: 4.5, lives: 5, shield: true, radius: 7, cpu: { look: 6, blunder: 0.07, wander: 0.05, dodge: false } },
-  normal: { W: 34, H: 24, speed: 7, lives: 3, shield: false, radius: 6, cpu: { look: 12, blunder: 0, wander: 0.03, dodge: true } },
+  phone: 0.7, // on a phone (a screen under 500 px on its short side) the arena is this much smaller
+  easy: { W: 34, H: 24, speed: 4.5, lives: 5, shield: true, radius: 6, cpu: { look: 6, blunder: 0.07, wander: 0.05, dodge: false } },
+  normal: { W: 28, H: 20, speed: 7, lives: 3, shield: false, radius: 5, cpu: { look: 12, blunder: 0, wander: 0.03, dodge: true } },
 };
